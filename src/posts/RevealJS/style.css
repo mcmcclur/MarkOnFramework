@@ -1,0 +1,93 @@
+@import url("observablehq:default.css");
+@import url("observablehq:theme-air.css");
+@import 'reveal.js/dist/reset.css';
+@import 'reveal.js/dist/reveal.css';
+@import 'reveal.js/dist/theme/sky.css';
+
+
+div.reveal {
+  width: 90%;
+  margin: 0 auto;
+  height: 500px;
+  border-bottom: solid 1px black;
+}
+
+
+section {
+  text-align: left;
+}
+.reveal h1.override {
+  font-size: 4rem;
+}
+.reveal h2.override {
+  font-size: 2.6rem;
+}
+.reveal h3.override {
+  font-size: 2.2rem;
+}
+.reveal h4 {
+  font-size: .8rem;
+}
+.reveal p {
+  font-size: 1.4rem;
+  max-width: 800px;
+}
+.reveal blockquote {
+  font-size: 1.2rem;
+}
+.reveal li {
+  font-size: 1.6rem;
+}
+.reveal figcaption {
+  font-size: 1rem;
+}
+.reveal figure {
+  margin: 10px;
+}
+.reveal table {
+  width: 100%;
+  font-size: 1rem !important;
+}
+.reveal table.centered td {
+  text-align: center;
+}
+.reveal table.centered th {
+  text-align: center;
+}
+.reveal .center {
+  text-align: center;
+}
+.it {
+  font-style: italic;
+}
+figure .katex, .x-tick-label .katex, .y-tick-label .katex {
+  font-size: 0.4em !important;
+}
+label .katex {
+  font-size: 2em !important;
+}
+/* details.code {
+  font-size: 2em !important;
+} */
+
+.date {
+  color: var(--theme-muted)
+}
+
+.header {
+  display: flex;
+  border-bottom: solid 0.5px black;
+  margin: 1rem auto;
+}
+.header a {
+  color: var(--theme-foreground);
+}
+.push {
+  margin-left: auto;
+}
+.header-item {
+  margin-top: 0;
+  margin-right: 15px;
+  margin-bottom: 5px;
+  color: inherit;
+}

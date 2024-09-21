@@ -1,0 +1,95 @@
+@import url("observablehq:default.css");
+@import url("observablehq:theme-air.css");
+
+
+main#observablehq-main {
+  max-width: 1100px;
+}
+p {
+  max-width: 750px;
+}
+
+
+.header {
+  display: flex;
+  border-bottom: solid 0.5px black;
+  margin: 1rem auto;
+}
+.header a {
+  color: var(--theme-foreground);
+}
+.push {
+  margin-left: auto;
+}
+.header-item {
+  margin-top: 0;
+  margin-right: 15px;
+  margin-bottom: 5px;
+  color: inherit;
+}
+
+
+
+#masthead {
+  max-width: 950px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+div.chart_container {
+  width: 100%;
+  padding-bottom: 30%;
+  position: relative;
+  font-weight: 300;
+  line-height: 1.5em;
+  font-family: sans-serif;
+}
+div#chart {
+  position: absolute;
+  top: 0; bottom: 0; left: 0; right: 0;
+}
+
+@media screen and (min-width: 768px) {
+  h1.small-title {
+    display: none;
+  }
+  div#Mark {
+    position: absolute;
+    top: 15%;
+    left: 2%;
+    font-size: 4em;
+  }
+  div#Framework {
+    position: absolute;
+    right: 2%;
+    bottom: 10%;
+    font-size: 4em;
+  }
+
+  #masthead {
+    background: var(--theme-background-alt);
+    border: solid 1px var(--theme-foreground-faintest);
+    border-radius: 0.75rem;
+    padding: 1rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  h1.title {
+    text-align: center;
+    font-size: 4em;
+  }
+  div#wnc {
+    display: none;
+  }
+  div#viz {
+    display: none;
+  }
+  div#chart {
+    background: var(--theme-background-alt);
+    border: solid 1px var(--theme-foreground-faintest);
+    border-radius: 0.75rem;
+  }
+  .hide-small {
+    display: none;
+  }
+}

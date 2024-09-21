@@ -1,0 +1,24 @@
+@import url("observablehq:default.css");
+@import url("observablehq:theme-air.css");
+
+.date {
+  color: var(--theme-muted)
+}
+
+.header {
+  display: flex;
+  border-bottom: solid 0.5px black;
+  margin: 1rem auto;
+}
+.header a {
+  color: var(--theme-foreground);
+}
+.push {
+  margin-left: auto;
+}
+.header-item {
+  margin-top: 0;
+  margin-right: 15px;
+  margin-bottom: 5px;
+  color: inherit;
+}
