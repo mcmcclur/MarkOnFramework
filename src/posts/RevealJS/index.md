@@ -14,9 +14,9 @@ style: style.css
 
 <!-- Content for the presentation should generally lie within a section element, with each section corresponding to either a single slide (if it contains no other sections) or a column of slides (if it does contain other sections) -->
 
-<!-- The DIV below, with id "fixed", doesn't appear within any section and, as a result, is actually always displayed. Its content is initially empty but can be set to anything we might want using Javascript. RevealJS provides an API that allows us to modify this DIV in response to slide changes. Thus, we can create content with a stable location that changes via D3 transitions when the desired slide changes. -->
+<!-- The DIV below, with id "fixed1", doesn't appear within any section and, as a result, is actually always displayed. Its content is initially empty but can be set to anything we might want using Javascript. RevealJS provides an API that allows us to modify this DIV in response to slide changes. Thus, we can create content with a stable location that changes via D3 transitions when the desired slide changes. -->
 
-<div id="fixed"></div>
+<div id="fixed1"></div>
 
 
 <!-- The title slide and intro -->
@@ -91,7 +91,7 @@ display(responsive_plot(a))
 
 
 
-<section data-id="alpha">
+<section data-id="alpha" data-class="fixed1">
 <h2 class="override">
   Letters sorted <span data-id="auto">alphabetically</span>
 </h2>
@@ -99,13 +99,13 @@ display(responsive_plot(a))
 Here's a bar chart illustrating the frequency of letters in the English alphabet. The bar chart updates dynamically when you navigate down to the next slide.
 <div style="height: 500px"></div>
 </section>
-<section data-id="ascending">
+<section data-id="ascending" data-class="fixed1">
 <h2 class="override">
   Letters sorted <span data-id="auto">by ascending frequency</span>
 </h2>
 <div style="height: 500px"></div>
 </section>
-<section data-id="descending">
+<section data-id="descending" data-class="fixed1">
 <h2 class="override">
 Letters sorted <span data-id="auto">by descending frequency</span>
 </h2>
@@ -271,29 +271,6 @@ It's also possible set up an absolutely positioned DIV that can be manipulated w
 </section>
 
 
-<!-- manual-animate -->
-
-<!-- <section>
-<section data-id="alpha">
-<h2 class="override">
-  Letters sorted <span data-id="auto">alphabetically</span>
-</h2>
-<div style="height: 500px"></div>
-</section>
-<section data-id="ascending">
-<h2 class="override">
-  Letters sorted <span data-id="auto">by ascending frequency</span>
-</h2>
-<div style="height: 500px"></div>
-</section>
-<section data-id="descending">
-<h2 class="override">
-Letters sorted <span data-id="auto">by descending frequency</span>
-</h2>
-<div style="height: 500px"></div>
-</section>
-</section> -->
-
 </div>
 </div>
 
@@ -311,7 +288,7 @@ import {MastodonComments} from '/components/mastodon-comments.js';
 ```js
 import {make_bar_chart} from './components/make_bar_chart.js';
 const bar_chart = make_bar_chart(alphabet);
-d3.select("#fixed")
+d3.select("#fixed1")
   .style('width', '960px')
   .style('height', '400px')
   .style('position', 'absolute')
@@ -332,17 +309,44 @@ let reveal = new Reveal({
   width: 960,
   height: 700,
 });
+reveal.on('ready', function(evt) {
+  const slide = d3.select(evt.currentSlide);
+  console.log(['ready with',
+    slide.attr('data-class'),
+    slide.attr('data-id')    
+  ]);
+  if(slide.attr('data-class') == "fixed1") {
+    console.log('so lets go')
+    if(slide.attr('data-id') == "alpha") {
+      bar_chart.sort('Alphabetical', 0)
+    }
+    else if(slide.attr('data-id') == "ascending") {
+      bar_chart.sort('Frequency ascending', 0)
+    }
+    else if(slide.attr('data-id') == "descending") {
+      bar_chart.sort('Frequency descending', 0)
+    }
+    d3.select('#fixed1')
+      .style('opacity', 1)
+  }
+})
 reveal.on('slidechanged', function(evt) {
   const slide_in = d3.select(evt.currentSlide);
   const slide_out = d3.select(evt.previousSlide);
-  if(slide_in.attr('data-id') && !slide_out.attr('data-id')) {
-    d3.select('#fixed')
+  if(
+    slide_in.attr('data-class') == "fixed1" &&
+    slide_out.attr('data-class') != "fixed1"
+  ) {
+    d3.select('#fixed1')
       .transition()
       .duration(500)
       .style('opacity', 1)
   }
-  else if(!slide_in.attr('data-id') && slide_out.attr('data-id')) {
-    d3.select('#fixed')
+  else if(
+    slide_in.attr('data-class') != "fixed1" &&
+    slide_out.attr('data-class') == "fixed1"
+  ) {
+    d3.select('#fixed1')
       .transition()
       .duration(500)
       .style('opacity', 0)
@@ -358,18 +362,4 @@ reveal.on('slidechanged', function(evt) {
   }
 })
 reveal.initialize();
-```
-
-```js
-// Collapse the collapsibles
-// From https://github.com/observablehq/framework/issues/833
-document.querySelectorAll('.collapse > .observablehq-pre-container').forEach(el => {
-  let wrapper = document.createElement('details');
-  wrapper.className = 'code'
-  let summary = document.createElement('summary')
-  summary.textContent = "View the code:"
-  wrapper.appendChild(summary)
-  el.parentNode.insertBefore(wrapper, el);
-  wrapper.appendChild(el);
-});
 ```

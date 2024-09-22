@@ -80,60 +80,107 @@ export function make_bar_chart(alphabet) {
   svg.node().sort = sort;
   return svg.node();
 
-  function sort(type) {
+  function sort(type, transition=true) {
     if (type == "Frequency ascending") {
-      bars
-        .selectAll("rect")
-        .transition()
-        .duration(1000)
-        .attr("x", (d) => d.position_by_frequency_ascending);
-      x_axis
-        .selectAll("g.tick")
-        .transition()
-        .duration(1000)
-        .attr(
-          "transform",
-          (d) =>
-            `translate(${
-              posMap.get(d).position_by_frequency_ascending + x_scale_by_frequency_ascending.bandwidth() / 2
-            }, 0)`
-        );
+      if(transition) {
+        bars
+          .selectAll("rect")
+          .transition()
+          .duration(1000)
+          .attr("x", (d) => d.position_by_frequency_ascending);
+        x_axis
+          .selectAll("g.tick")
+          .transition()
+          .duration(1000)
+          .attr(
+            "transform",
+            (d) =>
+              `translate(${
+                posMap.get(d).position_by_frequency_ascending + x_scale_by_frequency_ascending.bandwidth() / 2
+              }, 0)`
+          );
+      } else {
+        bars
+          .selectAll("rect")
+          .attr("x", (d) => d.position_by_frequency_ascending);
+        x_axis
+          .selectAll("g.tick")
+          .attr(
+            "transform",
+            (d) =>
+              `translate(${
+                posMap.get(d).position_by_frequency_ascending + x_scale_by_frequency_ascending.bandwidth() / 2
+              }, 0)`
+          );
+      }
     }
     else if (type == "Frequency descending") {
-      bars
-        .selectAll("rect")
-        .transition()
-        .duration(1000)
-        .attr("x", (d) => d.position_by_frequency_descending);
-      x_axis
-        .selectAll("g.tick")
-        .transition()
-        .duration(1000)
-        .attr(
-          "transform",
-          (d) =>
-            `translate(${
-              posMap.get(d).position_by_frequency_descending + x_scale_by_frequency_descending.bandwidth() / 2
-            }, 0)`
-        );
+      if(transition) {
+        bars
+          .selectAll("rect")
+          .transition()
+          .duration(1000)
+          .attr("x", (d) => d.position_by_frequency_descending);
+        x_axis
+          .selectAll("g.tick")
+          .transition()
+          .duration(1000)
+          .attr(
+            "transform",
+            (d) =>
+              `translate(${
+                posMap.get(d).position_by_frequency_descending + x_scale_by_frequency_descending.bandwidth() / 2
+              }, 0)`
+          );
+      }
+      else {
+        bars
+          .selectAll("rect")
+          .attr("x", (d) => d.position_by_frequency_descending);
+        x_axis
+          .selectAll("g.tick")
+          .attr(
+            "transform",
+            (d) =>
+              `translate(${
+                posMap.get(d).position_by_frequency_descending + x_scale_by_frequency_descending.bandwidth() / 2
+              }, 0)`
+          );
+      }
     }
     else if (type == "Alphabetical") {
-      bars
-        .selectAll("rect")
-        .transition()
-        .duration(1000)
-        .attr("x", (d) => d.position_by_alpha);
-      x_axis
-        .selectAll("g.tick")
-        .transition()
-        .duration(1000)
-        .attr(
-          "transform",
-          (d) =>
-            `translate(${
-              posMap.get(d).position_by_alpha + x_scale_by_alpha.bandwidth() / 2
-            }, 0)`
-        );
+      if(transition) {
+        bars
+          .selectAll("rect")
+          .transition()
+          .duration(1000)
+          .attr("x", (d) => d.position_by_alpha);
+        x_axis
+          .selectAll("g.tick")
+          .transition()
+          .duration(1000)
+          .attr(
+            "transform",
+            (d) =>
+              `translate(${
+                posMap.get(d).position_by_alpha + x_scale_by_alpha.bandwidth() / 2
+              }, 0)`
+          );
+      }
+      else {
+        bars
+          .selectAll("rect")
+          .attr("x", (d) => d.position_by_alpha);
+        x_axis
+          .selectAll("g.tick")
+          .attr(
+            "transform",
+            (d) =>
+              `translate(${
+                posMap.get(d).position_by_alpha + x_scale_by_alpha.bandwidth() / 2
+              }, 0)`
+          );
+      }
     }
   }
 }
