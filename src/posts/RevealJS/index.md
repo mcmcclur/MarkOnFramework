@@ -268,7 +268,7 @@ The dot plot from [a few slides back](#/dot-plot), for example, was generated wi
 
 RevealJS and Observable (via D3) both provide nice tools for transitions. RevealJS generally handles transitioning from slide to slide.
 
-It's also possible set up an absolutely positioned DIV that can be manipulated with D3 in response to slide changes.
+It's also possible set up an absolutely positioned DIV that can be manipulated with D3 in response to slide changes. That process is a bit tricky, though, so I've added some comments on how I've set that up here.
 
 </section>
 
@@ -350,7 +350,7 @@ Next (and still within the "slidechanged" event), if we slide onto one of the sl
           .style('opacity', 1)
       }
 
-There should be a similar call to set the opacity back to zero.
+There should be a similar call to set the opacity back to zero whnen `slide_out` data-class is `fixed2` but the `slide_in` data-class is no longer `fixed2` .
 </section>
 
 <section>
@@ -365,7 +365,7 @@ Now, we check the "data-id" and transition the slide as appropriate.
         transitioner.update('right')
       }
 
-Of course, the detaila of the `update` method are entirely dependent on the code that generated the image in the first place.
+Of course, the details of the `update` method are entirely dependent on the code that generated the image in the first place.
 </section>
 
 
