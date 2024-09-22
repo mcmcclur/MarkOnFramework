@@ -17,6 +17,7 @@ style: style.css
 <!-- The DIV below, with id "fixed1", doesn't appear within any section and, as a result, is actually always displayed. Its content is initially empty but can be set to anything we might want using Javascript. RevealJS provides an API that allows us to modify this DIV in response to slide changes. Thus, we can create content with a stable location that changes via D3 transitions when the desired slide changes. -->
 
 <div id="fixed1"></div>
+<div id="fixed2"></div>
 
 
 <!-- The title slide and intro -->
@@ -259,15 +260,141 @@ The dot plot from [a few slides back](#/dot-plot), for example, was generated wi
     }).plot()
 
 </section>
+</section>
 
 <section>
-<h3 class=override>D3 Transitions</h3>
+<section>
+<h2 class=override>D3 Transitions</h2>
 
 RevealJS and Observable (via D3) both provide nice tools for transitions. RevealJS generally handles transitioning from slide to slide.
 
 It's also possible set up an absolutely positioned DIV that can be manipulated with D3 in response to slide changes.
 
 </section>
+
+<section>
+<h3 class=override>D3 Transition setup - 1</h3>
+
+To setup an dynamic image that transitions on a slide change event, you should set up a `div` element to hold it:
+
+    <div id="fixed2"></div>
+
+That `div` should live inside the div classed "slides" but before the first `section` element.
+
+</section>
+
+<section>
+<h3 class=override>D3 Transition setup - 2</h3>
+
+Next, you need to append your dynamic image, which should probably be generated in a component. This is a logical place to set some styles as well; for example, the `opacity` should initially be zero.
+
+```js echo
+import {make_it} from
+  './components/make_d3_transition_element.js';
+const transitioner = make_it();
+d3.select("#fixed2")
+  .style('width', '960px')
+  .style('height', '200px')
+  .style('position', 'absolute')
+  .style('bottom', '200px')
+  .style('opacity', 0)
+  .append(() => transitioner)
+```
+
+</section>
+
+<section>
+<h3 class=override>D3 Transition setup - 3</h3>
+
+Now, we want the `div` element that we just created to appear on some subset of our slides. We'll set the "data-class" attribute of those slides to `fixed2`. We also set a unique "data-id" attribute to identify the state of the slide within the slide class:
+
+
+    <section data-id="transition-left" data-class="fixed2">
+      stuff
+      <div style="height: 400px"></div>
+    </section>
+    <section data-id="transition-right" data-class="fixed2">
+      more stuff
+      <div style="height: 400px"></div>
+    </section>
+
+The empty `div` is there to hold space for the absolutely positioned dynamic element.
+
+</section>
+
+<section>
+<h3 class=override>D3 Transition setup - 4</h3>
+
+Now, if `reveal` denotes the RevealJS instance, then we'll use its `slidechanged` method, noting the current and previous slides:
+
+    reveal.on('slidechanged', function(evt) {
+      const slide_in = d3.select(evt.currentSlide);
+      const slide_out = d3.select(evt.previousSlide);
+
+      ...
+    }
+</section>
+
+<section>
+<h3 class=override>D3 Transition setup - 5</h3>
+
+Next (and still within the "slidechanged" event), if we slide onto one of the slides with "data-class" equal to "fixed2", then we should set it's opacity to 1.
+
+      if(
+        slide_in.attr('data-class') == "fixed2" &&
+        slide_out.attr('data-class') != "fixed2"
+      ) {
+        d3.select('#fixed2')
+          .transition()
+          .duration(500)
+          .style('opacity', 1)
+      }
+
+There should be a similar call to set the opacity back to zero.
+</section>
+
+<section>
+<h3 class=override>D3 Transition setup - 6</h3>
+
+Now, we check the "data-id" and transition the slide as appropriate.
+
+      if(slide_in.attr('data-id') == "transition-left") {
+        transitioner.update('left')
+      }
+      else if(slide_in.attr('data-id') == "transition-right") {
+        transitioner.update('right')
+      }
+
+Of course, the detaila of the `update` method are entirely dependent on the code that generated the image in the first place.
+</section>
+
+
+<section data-id="transition-left" data-class="fixed2">
+<h3 class=override>D3 Transition result - left</h3>
+
+Here's the result:
+
+<div style="height: 400px"></div>
+
+</section>
+
+<section data-id="transition-right" data-class="fixed2">
+<h3 class=override>D3 Transition result - right</h3>
+
+And here's the result after transition:
+
+<div style="height: 400px"></div>
+
+</section>
+
+<section>
+<h3 class=override>D3 Transition - final comment</h3>
+
+Finally, it's worth adding a bit of code in the `reveal.on('ready')` block to set the opacity of the image to 1 if the user navigates directly to one of the slides in this block. You can set the state of the image appropriately, as well.
+
+</section>
+
+
 </section>
 
 
@@ -282,6 +409,7 @@ It's also possible set up an absolutely positioned DIV that can be manipulated w
 ```js
 import {MastodonComments} from '/components/mastodon-comments.js';
 ```
+
 
 
 
@@ -311,12 +439,7 @@ let reveal = new Reveal({
 });
 reveal.on('ready', function(evt) {
   const slide = d3.select(evt.currentSlide);
-  console.log(['ready with',
-    slide.attr('data-class'),
-    slide.attr('data-id')    
-  ]);
   if(slide.attr('data-class') == "fixed1") {
-    console.log('so lets go')
     if(slide.attr('data-id') == "alpha") {
       bar_chart.sort('Alphabetical', 0)
     }
@@ -327,6 +450,16 @@ reveal.on('ready', function(evt) {
       bar_chart.sort('Frequency descending', 0)
     }
     d3.select('#fixed1')
+      .style('opacity', 1)
+  }
+  else if(slide.attr('data-class') == "fixed2") {
+    if(slide.attr('data-id') == "transition-left") {
+      transitioner.update('left', 0)
+    }
+    else if(slide.attr('data-id') == "transition-right") {
+      transitioner.update('right', 0)
+    }
+    d3.select('#fixed2')
       .style('opacity', 1)
   }
 })
@@ -360,6 +493,33 @@ reveal.on('slidechanged', function(evt) {
   else if(slide_in.attr('data-id') == "descending") {
     bar_chart.sort('Frequency descending')
   }
+
+  if(
+    slide_in.attr('data-class') == "fixed2" &&
+    slide_out.attr('data-class') != "fixed2"
+  ) {
+    d3.select('#fixed2')
+      .transition()
+      .duration(500)
+      .style('opacity', 1)
+  }
+  else if(
+    slide_in.attr('data-class') != "fixed2" &&
+    slide_out.attr('data-class') == "fixed2"
+  ) {
+    d3.select('#fixed2')
+      .transition()
+      .duration(500)
+      .style('opacity', 0)
+  }
+  if(slide_in.attr('data-id') == "transition-left") {
+    transitioner.update('left')
+  }
+  else if(slide_in.attr('data-id') == "transition-right") {
+    transitioner.update('right')
+  }
+
+
 })
 reveal.initialize();
 ```
