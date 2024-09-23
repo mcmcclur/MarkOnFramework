@@ -6,7 +6,10 @@ export function list_posts() {
   config.pages.forEach(function(p) {
     let li = ul.append('li')
     let link = li.append('a')
-    link.attr('href', p.path)
+
+    // Note that absolute path doesn't
+    // work right here
+    link.attr('href', `.${p.path}`)
     link.text(p.name)
     let date = li.append('span')
       .style('color', '#666')
