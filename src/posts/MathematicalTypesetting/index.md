@@ -142,12 +142,23 @@ MathJax loads asynchronously and, as a result, is generally a little trickier to
 
 ## Comments
 
-<mastodon-comments host="mastodon.social" user="mark31459" tootId="113164654952539905" style="width : 640px"></mastodon-comments>
 
+<script src="https://giscus.app/client.js"
+  data-repo="mcmcclur/MarkOnFramework"
+  data-repo-id="R_kgDOM1U_mw"
+  data-category="Blog Comments"
+  data-category-id="DIC_kwDOM1U_m84CisbR"
+  data-mapping="title"
+  data-strict="0"
+  data-reactions-enabled="1"
+  data-emit-metadata="0"
+  data-input-position="top"
+  data-theme="light"
+  data-lang="en"
+  crossorigin="anonymous"
+  async>
+</script>
 
-```js
-import {MastodonComments} from '/components/mastodon-comments.js';
-```
 
 ```js
 import {collapse_code} from '/components/collapse_code.js'

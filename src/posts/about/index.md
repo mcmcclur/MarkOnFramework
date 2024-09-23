@@ -24,23 +24,26 @@ That's in contrast to the default footer which indicates when the whole project 
 
 In principle, it shouldn't be hard at all to create a data file indicating when the posts were written and incorporate that into a more prominent position the page. I like it where it is, though, so I haven't gone to the trouble.
 
-## Commenting via Mastodon Social
+## Commenting via GitHub and Giscus
 
-Anyone with a Mastodon account can comment on this or other posts. [Mastodon](https://joinmastodon.org/) is a decentralized social media platform that aspires to alleviate many of the problems that arise in conglomerate based social media.
-
-As [described by Wikipedia](https://en.wikipedia.org/wiki/Mastodon_(social_network)), Mastodon has microblogging features modeled after Twitter. Rather than a single, monolithic server, though, there are a large number of independently run severs, each with its own policies. The servers interact well with one another so that users can select a server whose policies they meets their values and still keep access to a larger social network.
-
-I've got an account on [Mastodon Social](https://mastodon.social), which is one of the larger servers, and also interact some with [Vis Social](https://vis.social/). This page uses [Dan Pecos's MastodonComments component](https://github.com/dpecos/mastodon-comments) (modified only slightly) to add commenting to a page in Observable Framework. The comments are hosted on [Mastodon Social](https://mastodon.social/) and mirrored here.
-
-Thus, if you've got a Mastodon account, you can tell me what you think about all this using the "Add comment" button below.
+Another fun feature of this site is that you can comment on any of the posts using GitHub Comments via the Giscus App! You can read more about that on the [Giscus post](/posts/giscus/).
 
 ---
 
 ## Comments
 
-<mastodon-comments host="mastodon.social" user="mark31459" tootId="113042798013708740" style="width : 640px"></mastodon-comments>
-
-
-```js
-import {MastodonComments} from '/components/mastodon-comments.js';
-```
+<script src="https://giscus.app/client.js"
+  data-repo="mcmcclur/MarkOnFramework"
+  data-repo-id="R_kgDOM1U_mw"
+  data-category="Blog Comments"
+  data-category-id="DIC_kwDOM1U_m84CisbR"
+  data-mapping="title"
+  data-strict="0"
+  data-reactions-enabled="1"
+  data-emit-metadata="0"
+  data-input-position="top"
+  data-theme="light"
+  data-lang="en"
+  crossorigin="anonymous"
+  async>
+</script>

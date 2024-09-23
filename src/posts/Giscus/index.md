@@ -6,6 +6,8 @@ title: Giscus in Framework
 
 I've experimented with a few ways to incorporate comments into a blog built with Observable Framework. If the blog is centered around software development, as this one focuses on using Observable Framework, then I think it might be hard to beat *GitHub Discussions embed via Giscus*!
 
+## Giscus 
+
 [The Giscus webpage](https://github.com/apps/giscus) lists several great aspects of the project, including:
 
 - It's free and open source,

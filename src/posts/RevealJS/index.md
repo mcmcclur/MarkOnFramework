@@ -403,12 +403,21 @@ Finally, it's worth adding a bit of code in the `reveal.on('ready')` block to se
 
 <h2 style="font-weight: 700; line-height: 1.15; font-size: 2em; margin-top: 20px;">Comments</h2>
 
-<mastodon-comments host="mastodon.social" user="mark31459" tootId="113164669296643009" style="width : 640px"></mastodon-comments>
-
-
-```js
-import {MastodonComments} from '/components/mastodon-comments.js';
-```
+<script src="https://giscus.app/client.js"
+  data-repo="mcmcclur/MarkOnFramework"
+  data-repo-id="R_kgDOM1U_mw"
+  data-category="Blog Comments"
+  data-category-id="DIC_kwDOM1U_m84CisbR"
+  data-mapping="title"
+  data-strict="0"
+  data-reactions-enabled="1"
+  data-emit-metadata="0"
+  data-input-position="top"
+  data-theme="light"
+  data-lang="en"
+  crossorigin="anonymous"
+  async>
+</script>
 
 
 

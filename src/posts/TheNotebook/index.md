@@ -50,14 +50,26 @@ It should be noted that Observable does provide a `convert` command that one mig
 
 ## Comments
 
-If you have thoughts about this that you'd like to share, you can comment via Mastodon using the "Add comment" button below.
+If you have thoughts about this that you'd like to share, you can comment via GitHub below.
 
-<mastodon-comments host="mastodon.social" user="mark31459" tootId="113043024531928041" style="width : 640px"></mastodon-comments>
+<script src="https://giscus.app/client.js"
+  data-repo="mcmcclur/MarkOnFramework"
+  data-repo-id="R_kgDOM1U_mw"
+  data-category="Blog Comments"
+  data-category-id="DIC_kwDOM1U_m84CisbR"
+  data-mapping="title"
+  data-strict="0"
+  data-reactions-enabled="1"
+  data-emit-metadata="0"
+  data-input-position="top"
+  data-theme="light"
+  data-lang="en"
+  crossorigin="anonymous"
+  async>
+</script>
 
 
 ```js
-import {MastodonComments} from '/components/mastodon-comments.js';
-
 const o = FileAttachment("o.png");
 ```
 
