@@ -26,7 +26,7 @@ In principle, it shouldn't be hard at all to create a data file indicating when 
 
 ## Commenting via GitHub and Giscus
 
-Another fun feature of this site is that you can comment on any of the posts using GitHub Comments via the Giscus App! You can read more about that on the [Giscus post](/posts/giscus/).
+Another fun feature of this site is that you can comment on any of the posts using GitHub Comments via the Giscus App! You can read more about that on the [Giscus post](/posts/Giscus/).
 
 ---
 
